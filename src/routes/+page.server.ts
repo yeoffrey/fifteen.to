@@ -4,7 +4,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { AddressInputFormSchema } from './schema';
 
 export const load: PageServerLoad = async ({ url }) => {
-	const code = url.searchParams.get('code') as 'missing_id' | null;
+	const code = url.searchParams.get('code') as 'missing_id' | 'not_found' | 'error' | null;
 
 	const form = await superValidate(zod(AddressInputFormSchema));
 

@@ -8,6 +8,10 @@
 
 {#if data.code === 'missing_id'}
 	<p class="text-red-500">Please search an address</p>
+{:else if data.code === 'not_found'}
+	<p class="text-red-500">Address not found</p>
+{:else if data.code === 'error'}
+	<p class="text-red-500">An error has occured, please try again later</p>
 {/if}
 
 <div class="flex h-screen flex-col items-center justify-center">
