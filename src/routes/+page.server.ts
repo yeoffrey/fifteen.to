@@ -3,10 +3,12 @@ import { zod } from 'sveltekit-superforms/adapters';
 import type { Actions, PageServerLoad } from './$types';
 import { AddressInputFormSchema } from './schema';
 
-export const load: PageServerLoad = async () => {
-	return {
-		form: await superValidate(zod(AddressInputFormSchema))
-	};
+export const load: PageServerLoad = async ({ url }) => {
+	const code = url.searchParams.get('code') as 'missing_id' | null;
+
+	const form = await superValidate(zod(AddressInputFormSchema));
+
+	return { form, code };
 };
 
 export const actions: Actions = {

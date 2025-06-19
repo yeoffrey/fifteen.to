@@ -6,6 +6,10 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
+{#if data.code === 'missing_id'}
+	<p class="text-red-500">Please search an address</p>
+{/if}
+
 <div class="flex h-screen flex-col items-center justify-center">
 	<Card.Root class="w-full max-w-md">
 		<Card.Header>

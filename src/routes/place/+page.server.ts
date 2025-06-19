@@ -1,12 +1,15 @@
 import { getPlace, searchNearby } from '$lib/server/places';
+import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url }) => {
-	//const id = url.searchParams.get('id') || 'ChIJN1t_tDeuEmsRUsoyG83frY4';
+	const id = url.searchParams.get('id');
 
-	const place = await getPlace('ChIJ8aqZNdpcK4gRJ__WBIAiv4Y');
+	if (!id) {
+		redirect(301, '/?code=missing_id');
+	}
 
-	// console.log(place);
+	const place = await getPlace(id);
 
 	const another = await searchNearby(
 		{
