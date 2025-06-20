@@ -1,4 +1,5 @@
 import { getLocation, searchNearby } from '$lib/server/places';
+import { computeRouteMatrix } from '$lib/server/routes';
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
@@ -24,6 +25,10 @@ export const load: PageServerLoad = async ({ url }) => {
 	if (!places) {
 		redirect(301, '/?code=error');
 	}
+
+	const routes = await computeRouteMatrix(id, [places.map((place) => place.id)[0]]);
+
+	console.log(routes);
 
 	return {
 		places
