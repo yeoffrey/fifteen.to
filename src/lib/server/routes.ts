@@ -16,7 +16,7 @@ const zRoute = z.object({
 	duration: z.string(),
 	condition: zCondition
 });
-type Route = z.infer<typeof zRoute>;
+export type Route = z.infer<typeof zRoute>;
 
 function makeWaypoint(placeId: string) {
 	return {
@@ -57,7 +57,7 @@ export async function computeRouteMatrix(
 		const validator = z.array(zRoute).safeParse(raw);
 
 		if (validator.success === false) {
-			console.error('Invalid route data:', validator.error);
+			console.error('Invalid route data:', raw);
 			return undefined;
 		}
 
