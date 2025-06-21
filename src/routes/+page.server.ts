@@ -1,10 +1,11 @@
+import type { ErrorCode } from '$lib/types';
 import { fail, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { Actions, PageServerLoad } from './$types';
 import { AddressInputFormSchema } from './schema';
 
 export const load: PageServerLoad = async ({ url }) => {
-	const code = url.searchParams.get('code') as 'missing_id' | 'not_found' | 'error' | null;
+	const code = url.searchParams.get('code') as ErrorCode | null;
 
 	const form = await superValidate(zod(AddressInputFormSchema));
 

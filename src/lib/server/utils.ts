@@ -1,7 +1,7 @@
 import type { Place } from './places';
 import type { Route } from './routes';
 
-type PlaceRoute = Place & {
+export type PlaceRoute = Place & {
 	distance: number;
 	duration: string;
 };
