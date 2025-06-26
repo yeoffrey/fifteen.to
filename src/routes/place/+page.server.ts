@@ -42,6 +42,6 @@ export const load: PageServerLoad = async ({ url }) => {
 	console.log('Matched places and routes:', placeRoutes);
 
 	return {
-		places
+		placeRoutes
 	};
 };

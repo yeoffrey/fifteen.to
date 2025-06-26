@@ -1,10 +1,7 @@
 import type { Place } from './places';
 import type { Route } from './routes';
 
-type PlaceRoute = Place & {
-	distance: number;
-	duration: string;
-};
+type PlaceRoute = Place & Pick<Route, 'distanceMeters' | 'duration'>;
 
 /**
  * Matches places with their corresponding routes based on the destination index.
@@ -12,7 +9,6 @@ type PlaceRoute = Place & {
  *
  * @param {Place[]} places - The array of places to match.
  * @param {Route[]} routes - The array of routes to match against the places.
- * @return {PlaceRoute[]} An array of PlaceRoute objects, each containing place details along with distance and duration.
  */
 export function matchPlacesAndRoutes(places: Place[], routes: Route[]): PlaceRoute[] {
 	return places
@@ -22,16 +18,16 @@ export function matchPlacesAndRoutes(places: Place[], routes: Route[]): PlaceRou
 			if (!route) {
 				return {
 					...place,
-					distance: null,
+					distanceMeters: null,
 					duration: null
 				};
 			}
 
 			return {
 				...place,
-				distance: route.distanceMeters,
+				distanceMeters: route.distanceMeters,
 				duration: route.duration
 			};
 		})
-		.filter((place) => place.distance !== null && place.duration !== null);
+		.filter((place) => place.distanceMeters !== null && place.duration !== null);
 }
