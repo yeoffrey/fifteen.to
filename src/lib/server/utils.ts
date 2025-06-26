@@ -6,15 +6,20 @@ type PlaceRoute = Place & {
 	duration: string;
 };
 
+/**
+ * Matches places with their corresponding routes based on the destination index.
+ * If a route is not found for a place, it will be excluded from the final array.
+ *
+ * @param {Place[]} places - The array of places to match.
+ * @param {Route[]} routes - The array of routes to match against the places.
+ * @return {PlaceRoute[]} An array of PlaceRoute objects, each containing place details along with distance and duration.
+ */
 export function matchPlacesAndRoutes(places: Place[], routes: Route[]): PlaceRoute[] {
-	// Each route has a 'destinationIndex' that corresponds to the index of the place in the 'places' array
 	return places
 		.map((place, index) => {
 			const route = routes.find((r) => r.destinationIndex === index);
 
 			if (!route) {
-				// What should happen if no route is found?
-				// For now, we will just remove the place from the final array
 				return {
 					...place,
 					distance: null,
