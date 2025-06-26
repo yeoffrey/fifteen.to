@@ -1,7 +1,7 @@
 <script lang="ts">
+	import AddressInput from '$lib/components/AddressInput.svelte';
 	import * as Form from '$lib/components/ui/form';
-	import { Input } from '$lib/components/ui/input';
-	import { type Infer, type SuperValidated, superForm } from 'sveltekit-superforms';
+	import SuperDebug, { type Infer, type SuperValidated, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { AddressInputFormSchema } from './schema';
 
@@ -19,10 +19,11 @@
 		<Form.Control>
 			{#snippet children({ props })}
 				<Form.Label>Address</Form.Label>
-				<Input {...props} bind:value={$formData.address} />
+				<AddressInput {...props} bind:value={$formData.address} />
 			{/snippet}
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>
 	<Form.Button>Submit</Form.Button>
 </form>
+<SuperDebug data={$formData} />
